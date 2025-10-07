@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG Document Analysis Worksheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .help-text {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .info-box {
+            background: #e7f5ff;
+            border-left: 4px solid #339af0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-box h4 {
+            color: #1864ab;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #495057;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .badge-original {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-derivative {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-primary {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .badge-secondary {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .badge-direct {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .badge-indirect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-negative {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-icon {
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .document-list {
+            margin-top: 20px;
+        }
+
+        .document-item {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .document-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .document-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+
+        .document-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .reliability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .reliability-item {
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+        }
+
+        .reliability-item h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .reliability-high {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+
+        .reliability-medium {
+            border-color: #ffc107;
+            background: #fffbf0;
+        }
+
+        .reliability-low {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .export-section {
+            background: #e7f5ff;
+            border: 2px solid #339af0;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .export-section h3 {
+            color: #1864ab;
+            margin-bottom: 15px;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .collapsible {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible:hover {
+            background: #5568d3;
+        }
+
+        .collapsible:after {
+            content: '+';
+            float: right;
+            font-weight: bold;
+        }
+
+        .collapsible.active:after {
+            content: '−';
+        }
+
+        .content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .content.show {
+            max-height: 2000px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .btn,
+            .export-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 BCG Document Analysis Worksheet</h1>
+            <p>Board for Certification of Genealogists - Source Evaluation Tool</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Document List Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>📚 Documents</h2>
+                    <button class="btn btn-primary" onclick="addDocument()">➕ Add Document</button>
+                </div>
+                <div id="documentList" class="document-list">
+                    <p style="text-align: center; color: #6c757d;">No documents added yet. Click "Add Document" to begin analysis.</p>
+                </div>
+            </div>
+
+            <!-- Export Section -->
+            <div class="export-section">
+                <h3>📄 Export Analysis</h3>
+                <div class="export-buttons">
+                    <button class="btn btn-success" onclick="previewAnalysis()">📋 Preview All Analyses</button>
+                    <button class="btn btn-primary" onclick="exportToWord()">📝 Export to Word</button>
+                    <button class="btn btn-secondary" onclick="exportForProofArgument()">⚖️ Export for Proof Argument</button>
+                    <button class="btn btn-secondary" onclick="saveProject()">💾 Save Project</button>
+                    <button class="btn btn-secondary" onclick="loadProject()">📂 Load Project</button>
+                    <button class="btn btn-danger" onclick="clearAll()">🗑️ Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let documents = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromStorage();
+        });
+
+        // Add document
+        function addDocument() {
+            const doc = {
+                id: Date.now(),
+                title: '',
+                citation: '',
+                sourceType: 'original',
+                infoType: 'primary',
+                evidenceType: 'direct',
+                creator: '',
+                creationDate: '',
+                purpose: '',
+                proximity: '',
+                biases: '',
+                completeness: '',
+                reliability: 'high',
+                facts: '',
+                analysis: '',
+                strengths: '',
+                weaknesses: ''
+            };
+            documents.push(doc);
+            renderDocuments();
+            saveToStorage();
+        }
+
+        // Render documents
+        function renderDocuments() {
+            const container = document.getElementById('documentList');
+            if (documents.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #6c757d;">No documents added yet. Click "Add Document" to begin analysis.</p>';
+                return;
+            }
+
+            container.innerHTML = documents.map((doc, index) => `
+                <div class="document-item">
+                    <div class="document-header">
+                        <span class="document-title">Document #${index + 1}: ${doc.title || 'Untitled'}</span>
+                        <button class="btn btn-danger btn-icon" onclick="deleteDocument(${doc.id})" title="Delete">🗑️</button>
+                    </div>
+
+                    <div class="document-badges">
+                        <span class="badge badge-${doc.sourceType === 'original' ? 'original' : 'derivative'}">${doc.sourceType}</span>
+                        <span class="badge badge-${doc.infoType === 'primary' ? 'primary' : 'secondary'}">${doc.infoType} Information</span>
+                        <span class="badge badge-${doc.evidenceType}">${doc.evidenceType} Evidence</span>
+                        <span class="badge" style="background: ${doc.reliability === 'high' ? '#d4edda' : doc.reliability === 'medium' ? '#fff3cd' : '#f8d7da'}">
+                            Reliability: ${doc.reliability.toUpperCase()}
+                        </span>
+                    </div>
+
+                    <!-- Basic Information -->
+                    <button class="collapsible" onclick="toggleSection(this)">1️⃣ Basic Information</button>
+                    <div class="content">
+                        <div style="padding: 15px;">
+                            <div class="form-group">
+                                <label>Document Title/Name:</label>
+                                <input type="text" value="${doc.title}" onchange="updateDocument(${doc.id}, 'title', this.value)" placeholder="e.g., Death Certificate of John Smith">
+                            </div>
+                            <div class="form-group">
+                                <label>Full Source Citation:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'citation', this.value)" placeholder="Paste complete Evidence Explained citation">${doc.citation}</textarea>
+                                <div class="help-text">Paste citation from Citation Builder or write in Evidence Explained format</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Source Classification -->
+                    <button class="collapsible" onclick="toggleSection(this)">2️⃣ Source Classification</button>
+                    <div class="content">
+                        <div style="padding: 15px;">
+                            <div class="info-box">
+                                <h4>Original vs. Derivative</h4>
+                                <p><strong>Original:</strong> First recording of information (birth certificate, marriage record, letter, diary)</p>
+                                <p><strong>Derivative:</strong> Later copy or extraction (database transcription, published abstract, microfilm)</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Source Classification:</label>
+                                <select onchange="updateDocument(${doc.id}, 'sourceType', this.value)">
+                                    <option value="original" ${doc.sourceType === 'original' ? 'selected' : ''}>Original Source</option>
+                                    <option value="derivative" ${doc.sourceType === 'derivative' ? 'selected' : ''}>Derivative Source</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Explanation of Classification:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'sourceClassification', this.value)" placeholder="Why is this source original or derivative? What is the chain of custody?">${doc.sourceClassification || ''}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Analysis -->
+                    <button class="collapsible" onclick="toggleSection(this)">3️⃣ Information Analysis</button>
+                    <div class="content">
+                        <div style="padding: 15px;">
+                            <div class="info-box">
+                                <h4>Primary vs. Secondary Information</h4>
+                                <p><strong>Primary:</strong> Information from someone present or with direct knowledge</p>
+                                <p><strong>Secondary:</strong> Information from someone not present or without direct knowledge</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Information Type:</label>
+                                <select onchange="updateDocument(${doc.id}, 'infoType', this.value)">
+                                    <option value="primary" ${doc.infoType === 'primary' ? 'selected' : ''}>Primary Information</option>
+                                    <option value="secondary" ${doc.infoType === 'secondary' ? 'selected' : ''}>Secondary Information</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Key Facts in This Document:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'facts', this.value)" placeholder="List the specific facts this document provides about your research question">${doc.facts}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Who Provided This Information?</label>
+                                <input type="text" value="${doc.creator}" onchange="updateDocument(${doc.id}, 'creator', this.value)" placeholder="Name and relationship to subject">
+                            </div>
+                            <div class="form-group">
+                                <label>Informant's Knowledge Level:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'proximity', this.value)" placeholder="Was the informant present? How would they know this information?">${doc.proximity}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evidence Evaluation -->
+                    <button class="collapsible" onclick="toggleSection(this)">4️⃣ Evidence Evaluation</button>
+                    <div class="content">
+                        <div style="padding: 15px;">
+                            <div class="info-box">
+                                <h4>Direct, Indirect, or Negative Evidence</h4>
+                                <p><strong>Direct:</strong> Explicitly answers your research question</p>
+                                <p><strong>Indirect:</strong> Suggests or implies the answer through reasoning</p>
+                                <p><strong>Negative:</strong> Expected evidence that's absent</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Evidence Type:</label>
+                                <select onchange="updateDocument(${doc.id}, 'evidenceType', this.value)">
+                                    <option value="direct" ${doc.evidenceType === 'direct' ? 'selected' : ''}>Direct Evidence</option>
+                                    <option value="indirect" ${doc.evidenceType === 'indirect' ? 'selected' : ''}>Indirect Evidence</option>
+                                    <option value="negative" ${doc.evidenceType === 'negative' ? 'selected' : ''}>Negative Evidence</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>How Does This Evidence Support Your Research Question?</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'analysis', this.value)" placeholder="Explain what this document proves, suggests, or fails to show">${doc.analysis}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reliability Assessment -->
+                    <button class="collapsible" onclick="toggleSection(this)">5️⃣ Reliability Assessment</button>
+                    <div class="content">
+                        <div style="padding: 15px;">
+                            <div class="form-group">
+                                <label>When Was This Document Created?</label>
+                                <input type="text" value="${doc.creationDate}" onchange="updateDocument(${doc.id}, 'creationDate', this.value)" placeholder="Contemporary with event or created later?">
+                            </div>
+                            <div class="form-group">
+                                <label>Purpose of Creation:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'purpose', this.value)" placeholder="Legal requirement? Personal record? Official government document?">${doc.purpose}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Potential Biases or Motivations:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'biases', this.value)" placeholder="Did the creator have reason to misrepresent facts?">${doc.biases}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Completeness:</label>
+                                <textarea onchange="updateDocument(${doc.id}, 'completeness', this.value)" placeholder="Is any information missing, illegible, or damaged?">${doc.completeness}</textarea>
+                            </div>
+                            <div class="reliability-grid">
+                                <div class="reliability-item">
+                                    <h4>Strengths:</h4>
+                                    <textarea onchange="updateDocument(${doc.id}, 'strengths', this.value)" style="min-height: 80px;">${doc.strengths}</textarea>
+                                </div>
+                                <div class="reliability-item">
+                                    <h4>Weaknesses:</h4>
+                                    <textarea onchange="updateDocument(${doc.id}, 'weaknesses', this.value)" style="min-height: 80px;">${doc.weaknesses}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Overall Reliability Rating:</label>
+                                <select onchange="updateDocument(${doc.id}, 'reliability', this.value)">
+                                    <option value="high" ${doc.reliability === 'high' ? 'selected' : ''}>High - Very reliable, few concerns</option>
+                                    <option value="medium" ${doc.reliability === 'medium' ? 'selected' : ''}>Medium - Generally reliable with some concerns</option>
+                                    <option value="low" ${doc.reliability === 'low' ? 'selected' : ''}>Low - Significant reliability issues</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Initialize collapsibles
+            initializeCollapsibles();
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(button) {
+            button.classList.toggle('active');
+            const content = button.nextElementSibling;
+            content.classList.toggle('show');
+        }
+
+        // Initialize all collapsibles
+        function initializeCollapsibles() {
+            const collapsibles = document.getElementsByClassName('collapsible');
+            for (let i = 0; i < collapsibles.length; i++) {
+                // Open first section by default
+                if (i % 5 === 0) {
+                    collapsibles[i].classList.add('active');
+                    collapsibles[i].nextElementSibling.classList.add('show');
+                }
+            }
+        }
+
+        // Update document
+        function updateDocument(id, field, value) {
+            const doc = documents.find(d => d.id === id);
+            if (doc) {
+                doc[field] = value;
+                saveToStorage();
+                renderDocuments();
+            }
+        }
+
+        // Delete document
+        function deleteDocument(id) {
+            if (confirm('Delete this document analysis?')) {
+                documents = documents.filter(d => d.id !== id);
+                renderDocuments();
+                saveToStorage();
+            }
+        }
+
+        // Preview analysis
+        function previewAnalysis() {
+            const html = buildAnalysisHTML();
+            const win = window.open('', '_blank');
+            win.document.write(html);
+            win.document.close();
+        }
+
+        // Build analysis HTML
+        function buildAnalysisHTML() {
+            let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Document Analysis</title><style>
+                body { font-family: 'Times New Roman', serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; }
+                h1 { text-align: center; font-size: 18pt; margin-bottom: 30px; }
+                h2 { font-size: 14pt; margin-top: 25px; margin-bottom: 12px; border-bottom: 2px solid #333; }
+                h3 { font-size: 12pt; margin-top: 20px; margin-bottom: 10px; }
+                p { text-align: justify; margin-bottom: 12px; }
+                .document { margin: 30px 0; padding: 20px; background: #f8f9fa; border-left: 4px solid #667eea; page-break-inside: avoid; }
+                .citation { font-style: italic; margin: 10px 0; }
+                .badges { margin: 10px 0; }
+                .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.9em; margin-right: 8px; }
+            </style></head><body>
+            <h1>DOCUMENT ANALYSIS WORKSHEETS</h1>`;
+
+            documents.forEach((doc, index) => {
+                html += `
+                <div class="document">
+                    <h2>Document #${index + 1}: ${doc.title}</h2>
+                    <div class="citation">${doc.citation}</div>
+                    <div class="badges">
+                        <span class="badge" style="background: ${doc.sourceType === 'original' ? '#d4edda' : '#fff3cd'}">${doc.sourceType.toUpperCase()}</span>
+                        <span class="badge" style="background: ${doc.infoType === 'primary' ? '#cfe2ff' : '#e2e3e5'}">${doc.infoType.toUpperCase()} Information</span>
+                        <span class="badge" style="background: #d1ecf1">${doc.evidenceType.toUpperCase()} Evidence</span>
+                        <span class="badge" style="background: ${doc.reliability === 'high' ? '#d4edda' : doc.reliability === 'medium' ? '#fff3cd' : '#f8d7da'}">Reliability: ${doc.reliability.toUpperCase()}</span>
+                    </div>
+                    
+                    <h3>Source Classification</h3>
+                    <p>${doc.sourceClassification || 'Not analyzed'}</p>
+                    
+                    <h3>Key Facts</h3>
+                    <p>${doc.facts}</p>
+                    
+                    <h3>Informant</h3>
+                    <p><strong>Who:</strong> ${doc.creator}</p>
+                    <p><strong>Knowledge:</strong> ${doc.proximity}</p>
+                    
+                    <h3>Evidence Analysis</h3>
+                    <p>${doc.analysis}</p>
+                    
+                    <h3>Reliability Assessment</h3>
+                    <p><strong>Created:</strong> ${doc.creationDate}</p>
+                    <p><strong>Purpose:</strong> ${doc.purpose}</p>
+                    <p><strong>Biases:</strong> ${doc.biases}</p>
+                    <p><strong>Completeness:</strong> ${doc.completeness}</p>
+                    <p><strong>Strengths:</strong> ${doc.strengths}</p>
+                    <p><strong>Weaknesses:</strong> ${doc.weaknesses}</p>
+                    <p><strong>Overall Rating:</strong> ${doc.reliability.toUpperCase()}</p>
+                </div>`;
+            });
+
+            html += '</body></html>';
+            return html;
+        }
+
+        // Export to Word
+        function exportToWord() {
+            const html = buildAnalysisHTML();
+            const blob = new Blob([html], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Document_Analysis_' + new Date().toISOString().split('T')[0] + '.doc';
+            a.click();
+            alert('✅ Analysis exported to Word!');
+        }
+
+        // Export for Proof Argument Builder
+        function exportForProofArgument() {
+            const evidenceData = documents.map((doc, index) => ({
+                number: index + 1,
+                citation: doc.citation,
+                sourceType: doc.sourceType,
+                infoType: doc.infoType,
+                evidenceType: doc.evidenceType,
+                reliability: doc.reliability,
+                summary: doc.facts,
+                analysis: doc.analysis
+            }));
+
+            const json = JSON.stringify(evidenceData, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'evidence_for_proof_argument_' + new Date().toISOString().split('T')[0] + '.json';
+            a.click();
+            alert('✅ Evidence data exported!\n\nYou can import this into the Proof Argument Builder to populate evidence sections automatically.');
+        }
+
+        // Storage functions
+        function saveToStorage() {
+            localStorage.setItem('bcgDocumentAnalysis', JSON.stringify(documents));
+        }
+
+        function loadFromStorage() {
+            const stored = localStorage.getItem('bcgDocumentAnalysis');
+            if (stored) {
+                documents = JSON.parse(stored);
+                renderDocuments();
+            }
+        }
+
+        function saveProject() {
+            saveToStorage();
+            const data = localStorage.getItem('bcgDocumentAnalysis');
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'document_analysis_' + new Date().toISOString().split('T')[0] + '.json';
+            a.click();
+            alert('✅ Project saved!');
+        }
+
+        function loadProject() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = e => {
+                    localStorage.setItem('bcgDocumentAnalysis', e.target.result);
+                    loadFromStorage();
+                    alert('✅ Project loaded!');
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function clearAll() {
+            if (confirm('⚠️ Clear all document analyses?\n\nThis cannot be undone!')) {
+                documents = [];
+                renderDocuments();
+                localStorage.removeItem('bcgDocumentAnalysis');
+                alert('✅ All analyses cleared!');
+            }
+        }
+    </script>
+</body>
+</html>
