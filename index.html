@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCG Document Analysis Worksheet</title>
+    <title>📄 BCG Document Analysis Worksheet</title>
     <style>
         * {
             margin: 0;
@@ -12,36 +12,37 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Georgia, 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc8 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #5c4033 0%, #8b6f47 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 2em;
+            font-size: 32px;
             margin-bottom: 10px;
         }
 
         .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
+            opacity: 0.95;
+            font-size: 16px;
         }
 
         .main-content {
@@ -51,9 +52,9 @@
         .section {
             margin-bottom: 30px;
             padding: 25px;
-            background: #f8f9fa;
+            background: #f9f6f0;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border: 2px solid #d4c4a8;
         }
 
         .section-header {
@@ -61,11 +62,13 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d4c4a8;
         }
 
         .section-header h2 {
-            color: #2c3e50;
-            font-size: 1.5em;
+            color: #5c4033;
+            font-size: 24px;
         }
 
         .form-group {
@@ -75,9 +78,9 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #2c3e50;
-            font-weight: 600;
-            font-size: 0.95em;
+            color: #5c4033;
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .form-group input,
@@ -85,18 +88,19 @@
         .form-group select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #dee2e6;
+            border: 2px solid #d4c4a8;
             border-radius: 6px;
-            font-size: 1em;
-            font-family: inherit;
+            font-size: 14px;
+            font-family: Georgia, serif;
             transition: border-color 0.3s ease;
+            background: white;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #8b6f47;
         }
 
         .form-group textarea {
@@ -105,37 +109,39 @@
         }
 
         .help-text {
-            font-size: 0.9em;
-            color: #6c757d;
+            font-size: 12px;
+            color: #8b6f47;
             margin-top: 5px;
             font-style: italic;
         }
 
         .info-box {
-            background: #e7f5ff;
-            border-left: 4px solid #339af0;
+            background: #fff8e7;
+            border-left: 4px solid #f39c12;
             padding: 15px;
             margin: 15px 0;
             border-radius: 4px;
         }
 
         .info-box h4 {
-            color: #1864ab;
+            color: #5c4033;
             margin-bottom: 8px;
+            font-size: 16px;
         }
 
         .info-box p {
-            color: #495057;
+            color: #8b6f47;
             margin-bottom: 8px;
             line-height: 1.6;
+            font-size: 14px;
         }
 
         .badge {
             display: inline-block;
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: bold;
             margin: 4px;
         }
 
@@ -178,8 +184,9 @@
             padding: 12px 24px;
             border: none;
             border-radius: 6px;
-            font-size: 1em;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Georgia, serif;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
@@ -188,14 +195,14 @@
         }
 
         .btn-primary {
-            background: #667eea;
+            background: #8b6f47;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #5568d3;
+            background: #5c4033;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(92, 64, 51, 0.3);
         }
 
         .btn-secondary {
@@ -243,13 +250,13 @@
             padding: 20px;
             border-radius: 6px;
             margin-bottom: 15px;
-            border: 2px solid #dee2e6;
+            border: 2px solid #d4c4a8;
             transition: all 0.3s ease;
         }
 
         .document-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: #8b6f47;
+            box-shadow: 0 2px 8px rgba(139, 111, 71, 0.2);
         }
 
         .document-header {
@@ -258,13 +265,13 @@
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #f8f9fa;
+            border-bottom: 2px solid #f9f6f0;
         }
 
         .document-title {
-            font-weight: 700;
-            color: #2c3e50;
-            font-size: 1.2em;
+            font-weight: bold;
+            color: #5c4033;
+            font-size: 18px;
         }
 
         .document-badges {
@@ -285,13 +292,13 @@
             padding: 15px;
             background: white;
             border-radius: 6px;
-            border: 2px solid #dee2e6;
+            border: 2px solid #d4c4a8;
         }
 
         .reliability-item h4 {
-            color: #667eea;
+            color: #8b6f47;
             margin-bottom: 8px;
-            font-size: 0.95em;
+            font-size: 14px;
         }
 
         .reliability-high {
@@ -310,16 +317,18 @@
         }
 
         .export-section {
-            background: #e7f5ff;
-            border: 2px solid #339af0;
+            background: #fff8e7;
+            border: 2px solid #f39c12;
+            border-left: 4px solid #f39c12;
             border-radius: 8px;
             padding: 25px;
             text-align: center;
         }
 
         .export-section h3 {
-            color: #1864ab;
+            color: #5c4033;
             margin-bottom: 15px;
+            font-size: 20px;
         }
 
         .export-buttons {
@@ -330,7 +339,7 @@
         }
 
         .collapsible {
-            background: #667eea;
+            background: #8b6f47;
             color: white;
             cursor: pointer;
             padding: 12px;
@@ -338,15 +347,16 @@
             border: none;
             text-align: left;
             outline: none;
-            font-size: 1em;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Georgia, serif;
             border-radius: 6px;
             margin-bottom: 10px;
             transition: all 0.3s ease;
         }
 
         .collapsible:hover {
-            background: #5568d3;
+            background: #5c4033;
         }
 
         .collapsible:after {
@@ -369,90 +379,165 @@
             max-height: 2000px;
         }
 
+        .banner {
+            background: linear-gradient(135deg, #5c4033 0%, #8b6f47 100%);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .banner-text {
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .export-buttons {
+                flex-direction: column;
+            }
+            
+            .banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
         @media print {
             body {
                 background: white;
             }
             .btn,
-            .export-section {
+            .export-section,
+            .banner {
                 display: none;
+            }
+        }
+
+        /* ============================================
+           BK GENEALOGY UNIVERSAL PRINT OPTIMIZATION
+           ============================================ */
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            @page {
+                size: letter;
+                margin: 0.5in 0.75in;
+            }
+            
+            body {
+                background: white !important;
+                padding: 0;
+                margin: 0;
+                font-size: 11pt;
+                line-height: 1.4;
+            }
+            
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 0;
+                border-radius: 0;
+                background: white;
+            }
+            
+            h1 {
+                color: #5c4033 !important;
+                font-size: 20pt;
+                border-bottom: 2px solid #d4c4a8 !important;
+                padding-bottom: 8pt;
+                margin-bottom: 12pt;
+                page-break-after: avoid;
+            }
+            
+            .section {
+                background: #f9f6f0 !important;
+                border: 1px solid #d4c4a8 !important;
+                border-radius: 0;
+                padding: 12pt;
+                margin-bottom: 12pt;
+                page-break-inside: avoid;
+            }
+            
+            .section h2 {
+                color: #5c4033 !important;
+                font-size: 14pt;
+                border-bottom: 1px solid #d4c4a8 !important;
+                padding-bottom: 6pt;
+                margin-bottom: 10pt;
+                page-break-after: avoid;
+            }
+            
+            .document-item {
+                background: #f9f6f0 !important;
+                border: 1px solid #d4c4a8 !important;
+                page-break-before: always;
+                page-break-inside: avoid;
+                margin-bottom: 12pt;
+            }
+            
+            /* Don't force page break for the very first document */
+            .document-item:first-child {
+                page-break-before: auto;
+            }
+            
+            .collapsible {
+                background: #8b6f47 !important;
+                page-break-after: avoid;
+            }
+            
+            .content {
+                max-height: none !important;
+                display: block !important;
+            }
+            
+            .form-group {
+                margin-bottom: 10pt;
+                page-break-inside: avoid;
+            }
+            
+            label {
+                display: block;
+                font-weight: bold;
+                font-size: 10pt;
+                color: #5c4033 !important;
+                margin-bottom: 4pt;
+            }
+            
+            input, textarea, select {
+                border: 1px solid #d4c4a8 !important;
+                background: white !important;
+                padding: 6pt;
+                font-size: 10pt;
             }
         }
     </style>
 </head>
 <body>
-  <!-- BCG Toolkit Header Banner -->
-<!-- Add this IMMEDIATELY after the opening <body> tag in each tool -->
-
-<div class="bcg-toolkit-banner">
-    <div class="banner-content">
-        <span class="banner-text">📚 Part of the <strong>BCG Portfolio Toolkit</strong></span>
-        <a href="https://bkgenealogy.github.io/" class="banner-link">View All Tools →</a>
+    <div class="banner">
+        <div class="banner-content">
+            <span class="banner-text">📚 Part of the <strong>BCG Portfolio Toolkit</strong></span>
+        </div>
     </div>
-</div>
 
-<style>
-    .bcg-toolkit-banner {
-        background: linear-gradient(135deg, #5c4033 0%, #8b6f47 100%);
-        color: white;
-        padding: 12px 20px;
-        text-align: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        font-family: Georgia, 'Times New Roman', serif;
-    }
-    
-    .banner-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    
-    .banner-text {
-        font-size: 14px;
-        opacity: 0.95;
-    }
-    
-    .banner-text strong {
-        font-weight: bold;
-    }
-    
-    .banner-link {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        padding: 6px 15px;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 13px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .banner-link:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-1px);
-    }
-    
-    @media (max-width: 600px) {
-        .banner-content {
-            flex-direction: column;
-            text-align: center;
-        }
-        
-        .banner-text {
-            font-size: 13px;
-        }
-    }
-</style>
-
-<!-- End BCG Toolkit Header Banner -->  
     <div class="container">
         <div class="header">
             <h1>📄 BCG Document Analysis Worksheet</h1>
@@ -467,7 +552,7 @@
                     <button class="btn btn-primary" onclick="addDocument()">➕ Add Document</button>
                 </div>
                 <div id="documentList" class="document-list">
-                    <p style="text-align: center; color: #6c757d;">No documents added yet. Click "Add Document" to begin analysis.</p>
+                    <p style="text-align: center; color: #8b6f47;">No documents added yet. Click "Add Document" to begin analysis.</p>
                 </div>
             </div>
 
@@ -476,7 +561,8 @@
                 <h3>📄 Export Analysis</h3>
                 <div class="export-buttons">
                     <button class="btn btn-success" onclick="previewAnalysis()">📋 Preview All Analyses</button>
-                    <button class="btn btn-primary" onclick="exportToWord()">📝 Export to Word</button>
+                    <button class="btn btn-primary" onclick="printAnalysis()">🖨️ Print All Analyses</button>
+                    <button class="btn btn-secondary" onclick="exportToWord()">📝 Export to Word</button>
                     <button class="btn btn-secondary" onclick="exportForProofArgument()">⚖️ Export for Proof Argument</button>
                     <button class="btn btn-secondary" onclick="saveProject()">💾 Save Project</button>
                     <button class="btn btn-secondary" onclick="loadProject()">📂 Load Project</button>
@@ -489,12 +575,10 @@
     <script>
         let documents = [];
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadFromStorage();
         });
 
-        // Add document
         function addDocument() {
             const doc = {
                 id: Date.now(),
@@ -513,18 +597,18 @@
                 facts: '',
                 analysis: '',
                 strengths: '',
-                weaknesses: ''
+                weaknesses: '',
+                sourceClassification: ''
             };
             documents.push(doc);
             renderDocuments();
             saveToStorage();
         }
 
-        // Render documents
         function renderDocuments() {
             const container = document.getElementById('documentList');
             if (documents.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #6c757d;">No documents added yet. Click "Add Document" to begin analysis.</p>';
+                container.innerHTML = '<p style="text-align: center; color: #8b6f47;">No documents added yet. Click "Add Document" to begin analysis.</p>';
                 return;
             }
 
@@ -544,7 +628,6 @@
                         </span>
                     </div>
 
-                    <!-- Basic Information -->
                     <button class="collapsible" onclick="toggleSection(this)">1️⃣ Basic Information</button>
                     <div class="content">
                         <div style="padding: 15px;">
@@ -560,7 +643,6 @@
                         </div>
                     </div>
 
-                    <!-- Source Classification -->
                     <button class="collapsible" onclick="toggleSection(this)">2️⃣ Source Classification</button>
                     <div class="content">
                         <div style="padding: 15px;">
@@ -583,7 +665,6 @@
                         </div>
                     </div>
 
-                    <!-- Information Analysis -->
                     <button class="collapsible" onclick="toggleSection(this)">3️⃣ Information Analysis</button>
                     <div class="content">
                         <div style="padding: 15px;">
@@ -614,7 +695,6 @@
                         </div>
                     </div>
 
-                    <!-- Evidence Evaluation -->
                     <button class="collapsible" onclick="toggleSection(this)">4️⃣ Evidence Evaluation</button>
                     <div class="content">
                         <div style="padding: 15px;">
@@ -639,7 +719,6 @@
                         </div>
                     </div>
 
-                    <!-- Reliability Assessment -->
                     <button class="collapsible" onclick="toggleSection(this)">5️⃣ Reliability Assessment</button>
                     <div class="content">
                         <div style="padding: 15px;">
@@ -662,11 +741,11 @@
                             <div class="reliability-grid">
                                 <div class="reliability-item">
                                     <h4>Strengths:</h4>
-                                    <textarea onchange="updateDocument(${doc.id}, 'strengths', this.value)" style="min-height: 80px;">${doc.strengths}</textarea>
+                                    <textarea onchange="updateDocument(${doc.id}, 'strengths', this.value)" style="min-height: 80px; width: 100%; padding: 8px; border: 2px solid #d4c4a8; border-radius: 4px; font-family: Georgia, serif;">${doc.strengths}</textarea>
                                 </div>
                                 <div class="reliability-item">
                                     <h4>Weaknesses:</h4>
-                                    <textarea onchange="updateDocument(${doc.id}, 'weaknesses', this.value)" style="min-height: 80px;">${doc.weaknesses}</textarea>
+                                    <textarea onchange="updateDocument(${doc.id}, 'weaknesses', this.value)" style="min-height: 80px; width: 100%; padding: 8px; border: 2px solid #d4c4a8; border-radius: 4px; font-family: Georgia, serif;">${doc.weaknesses}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -682,22 +761,18 @@
                 </div>
             `).join('');
 
-            // Initialize collapsibles
             initializeCollapsibles();
         }
 
-        // Toggle collapsible sections
         function toggleSection(button) {
             button.classList.toggle('active');
             const content = button.nextElementSibling;
             content.classList.toggle('show');
         }
 
-        // Initialize all collapsibles
         function initializeCollapsibles() {
             const collapsibles = document.getElementsByClassName('collapsible');
             for (let i = 0; i < collapsibles.length; i++) {
-                // Open first section by default
                 if (i % 5 === 0) {
                     collapsibles[i].classList.add('active');
                     collapsibles[i].nextElementSibling.classList.add('show');
@@ -705,7 +780,6 @@
             }
         }
 
-        // Update document
         function updateDocument(id, field, value) {
             const doc = documents.find(d => d.id === id);
             if (doc) {
@@ -715,7 +789,6 @@
             }
         }
 
-        // Delete document
         function deleteDocument(id) {
             if (confirm('Delete this document analysis?')) {
                 documents = documents.filter(d => d.id !== id);
@@ -724,7 +797,6 @@
             }
         }
 
-        // Preview analysis
         function previewAnalysis() {
             const html = buildAnalysisHTML();
             const win = window.open('', '_blank');
@@ -732,15 +804,24 @@
             win.document.close();
         }
 
-        // Build analysis HTML
+        function printAnalysis() {
+            const html = buildAnalysisHTML();
+            const win = window.open('', '_blank');
+            win.document.write(html);
+            win.document.close();
+            setTimeout(() => {
+                win.print();
+            }, 250);
+        }
+
         function buildAnalysisHTML() {
             let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Document Analysis</title><style>
-                body { font-family: 'Times New Roman', serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; }
-                h1 { text-align: center; font-size: 18pt; margin-bottom: 30px; }
-                h2 { font-size: 14pt; margin-top: 25px; margin-bottom: 12px; border-bottom: 2px solid #333; }
-                h3 { font-size: 12pt; margin-top: 20px; margin-bottom: 10px; }
+                body { font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; }
+                h1 { text-align: center; font-size: 18pt; margin-bottom: 30px; color: #5c4033; }
+                h2 { font-size: 14pt; margin-top: 25px; margin-bottom: 12px; border-bottom: 2px solid #d4c4a8; color: #5c4033; }
+                h3 { font-size: 12pt; margin-top: 20px; margin-bottom: 10px; color: #5c4033; }
                 p { text-align: justify; margin-bottom: 12px; }
-                .document { margin: 30px 0; padding: 20px; background: #f8f9fa; border-left: 4px solid #667eea; page-break-inside: avoid; }
+                .document { margin: 30px 0; padding: 20px; background: #f9f6f0; border-left: 4px solid #8b6f47; page-break-inside: avoid; }
                 .citation { font-style: italic; margin: 10px 0; }
                 .badges { margin: 10px 0; }
                 .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.9em; margin-right: 8px; }
@@ -787,7 +868,6 @@
             return html;
         }
 
-        // Export to Word
         function exportToWord() {
             const html = buildAnalysisHTML();
             const blob = new Blob([html], { type: 'application/msword' });
@@ -799,7 +879,6 @@
             alert('✅ Analysis exported to Word!');
         }
 
-        // Export for Proof Argument Builder
         function exportForProofArgument() {
             const evidenceData = documents.map((doc, index) => ({
                 number: index + 1,
@@ -822,7 +901,6 @@
             alert('✅ Evidence data exported!\n\nYou can import this into the Proof Argument Builder to populate evidence sections automatically.');
         }
 
-        // Storage functions
         function saveToStorage() {
             localStorage.setItem('bcgDocumentAnalysis', JSON.stringify(documents));
         }
